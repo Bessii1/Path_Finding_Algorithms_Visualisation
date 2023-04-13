@@ -44,4 +44,4 @@ while True:
 
     [exit() for event in pg.event.get() if event.type == pg.QUIT]
     pg.display.flip()
-    clock.tick(7)
+    clock.tick(30)

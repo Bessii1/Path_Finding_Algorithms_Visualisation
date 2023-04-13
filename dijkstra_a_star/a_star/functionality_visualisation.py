@@ -55,20 +55,23 @@ queue = []
 heappush(queue, (0, start))
 cost_visited = {start: 0}
 visited = {start: None}
+next_nodes_to_visit = []
 
 while True:
     for y, row in enumerate(grid):
         for x, col in enumerate(row):
-            pg.draw.rect(sc, get_rgb_color_from_hex("#F9E2AF"), get_rect(x, y), border_radius=TILE // 5)
+            pg.draw.rect(sc, get_rgb_color_from_hex("#F9E2AF"), get_rect(x, y))
 
     [pg.draw.rect(sc, get_rgb_color_from_hex("#009FBD"), get_rect(x, y)) for x, y in visited]
-    [pg.draw.rect(sc, get_rgb_color_from_hex("#A5D7E8"), get_rect(*xy)) for _, xy in queue]
+    next_nodes_to_visit = next_nodes_to_visit if len(queue) == 0 else queue
+    [pg.draw.rect(sc, get_rgb_color_from_hex("#A5D7E8"), get_rect(*xy)) for _, xy in next_nodes_to_visit]
+
     pg.draw.circle(sc, pg.Color('red'), *get_circle(*goal))
-    #
-    # Dijkstra logic
+
     if queue:
         cur_cost, cur_node = heappop(queue)
         if cur_node == goal:
+            next_nodes_to_visit = queue
             queue = []
             continue
 
