@@ -45,7 +45,6 @@ for y, row in enumerate(grid):
     for x, col in enumerate(row):
         graph[(x, y)] = graph.get((x, y), []) + get_next_nodes(x, y)
 
-# BFS settings
 start = (0, 7)
 goal = (22, 7)
 queue = []
@@ -55,9 +54,6 @@ visited = {start: None}
 next_nodes_to_visit = []
 
 while True:
-    # fill screen
-    # sc.blit(bg, (0, 0))
-    # for x, col in enumerate(row)
     for y, row in enumerate(grid):
         for x, col in enumerate(row):
             pg.draw.rect(sc, get_rgb_color_from_hex("#F9E2AF"), get_rect(x, y), border_radius=TILE // 5)
@@ -66,8 +62,8 @@ while True:
     next_nodes_to_visit = next_nodes_to_visit if len(queue) == 0 else queue
     [pg.draw.rect(sc, get_rgb_color_from_hex("#A5D7E8"), get_rect(*xy)) for _, xy in next_nodes_to_visit]
     pg.draw.circle(sc, pg.Color('red'), *get_circle(*goal))
-    #
-    # # Dijkstra logic
+
+    # Dijkstra logic
     if queue:
         cur_cost, cur_node = heappop(queue)
         if cur_node == goal:
