@@ -27,7 +27,7 @@ def get_click_mouse_pos():
 def heuristic(a, b):
    return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
-def dijkstra(start, goal, graph):
+def a_star(start, goal, graph):
     queue = []
     heappush(queue, (0, start))
     cost_visited = {start: 0}
@@ -115,7 +115,7 @@ while running:
                     if len(set(mouse_positions)) == 2:
                         start = list(mouse_positions)[0]
                         goal = list(mouse_positions)[1]
-                        visited, queue = dijkstra(start, goal, graph)
+                        visited, queue = a_star(start, goal, graph)
 
 
 
